@@ -7,7 +7,30 @@ export const Users: CollectionConfig = {
   },
   auth: true,
   fields: [
-    // Email added by default
-    // Add more fields as needed
+    {
+      name: 'role',
+      label: 'Role',
+      type: 'select',
+      defaultValue: 'user',
+      saveToJWT: true,
+      options: [
+        {
+          label: 'User',
+          value: 'user',
+        },
+        {
+          label: 'Admin',
+          value: 'admin',
+        },
+      ],
+    },
+    {
+      name: 'managedCustomers',
+      label: 'Managed Customers',
+      type: 'join',
+      collection: 'customers',
+      on: 'accountManager',
+      hasMany: true,
+    }
   ],
 }
